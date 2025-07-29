@@ -9,4 +9,5 @@ export class PostsController {
   getPosts() {
     return this.postsService.getPosts()
   }
+  ///ádfasdfasdf
 }
