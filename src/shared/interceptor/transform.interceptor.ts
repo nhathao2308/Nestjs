@@ -12,7 +12,7 @@ export class TransformInterceptor<T> implements NestInterceptor<T, Response<T>> 
     return next.handle().pipe(
       map((data) => {
         const statusCode = context.switchToHttp().getResponse().statusCode
-        return { data, statusCode }
+        return { statusCode, data }
       }),
     )
   }

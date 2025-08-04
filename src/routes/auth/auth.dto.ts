@@ -1,5 +1,6 @@
-import { Exclude } from 'class-transformer'
+import { Exclude, Type } from 'class-transformer'
 import { IsString } from 'class-validator'
+import { SuccessResponsedDTO } from 'src/shared/shared.dto'
 
 export class LoginDTO {
   @IsString()
@@ -15,7 +16,7 @@ export class RegisterDTO extends LoginDTO {
   confirmPassword: string
 }
 
-export class RegisterResponseDTO {
+class RegisterData {
   id: number
   email: string
   name: string
@@ -23,7 +24,17 @@ export class RegisterResponseDTO {
   createAt: Date
   updateAt: Date
 
-  constructor(partial: Partial<RegisterResponseDTO>) {
+  constructor(partial: Partial<RegisterData>) {
+    Object.assign(this, partial)
+  }
+}
+
+export class RegisterResponseDTO extends SuccessResponsedDTO {
+  @Type(() => RegisterData)
+  declare data: RegisterData
+
+  constructor(partial: Partial<SuccessResponsedDTO>) {
+    super(partial)
     Object.assign(this, partial)
   }
 }
