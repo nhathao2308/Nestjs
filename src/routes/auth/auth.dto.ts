@@ -1,5 +1,6 @@
 import { Exclude, Type } from 'class-transformer'
 import { IsString } from 'class-validator'
+import { Match } from 'src/shared/decorator/custom-validator.decorator'
 import { SuccessResponsedDTO } from 'src/shared/shared.dto'
 
 export class LoginDTO {
@@ -22,6 +23,7 @@ export class RegisterDTO extends LoginDTO {
   @IsString()
   name: string
   @IsString()
+  @Match('password')
   confirmPassword: string
 }
 

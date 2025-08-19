@@ -40,7 +40,7 @@ export class AuthService {
 
     const refreshTokenData = await this.tokenservice.verifyRefreshToken(refreshToken)
 
-    this.prismaService.refreshToken.create({
+    await this.prismaService.refreshToken.create({
       data: {
         token: refreshToken,
         userId: payload.userId,
@@ -71,7 +71,6 @@ export class AuthService {
         },
       ])
     }
-
     const token = await this.generateTokens({ userId: user.id })
     return token
   }
